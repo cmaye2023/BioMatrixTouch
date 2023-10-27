@@ -35,6 +35,7 @@ android {
     }
     buildFeatures{
         viewBinding = true
+        dataBinding = true
     }
 }
 
@@ -52,5 +53,16 @@ dependencies {
     //BioMatrix Authentication
 
     implementation ("androidx.biometric:biometric:1.2.0-alpha03")
+
+
+    // CameraX
+    val camerax_version = "1.3.0"
+    implementation ("androidx.camera:camera-core:$camerax_version")
+    implementation ("androidx.camera:camera-camera2:$camerax_version")
+    implementation ("androidx.camera:camera-lifecycle:$camerax_version")
+    implementation ("com.google.mlkit:face-detection:16.1.5")
+
+
+    implementation ("androidx.camera:camera-view:1.1.0-alpha02")
 
 }

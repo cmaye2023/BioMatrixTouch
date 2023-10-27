@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="black_text_view">#B7000000</color>
+    <color name="black_text_view1">#80000000</color>
+    <color name="black_finger_print">#B8000000</color>
+
+
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#951616</color>
+
+
+    <color name="red_light_text_button">#E45063</color>
+
+    <color name="blue_light_button">#24A0ED</color>
+    <color name="blue_light_view">#355C7D </color>
+
+    <color name="pink_light_finger_print">#F67280</color>
+
 </resources>

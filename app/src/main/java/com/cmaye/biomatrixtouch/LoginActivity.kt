@@ -1,22 +1,21 @@
 package com.cmaye.biomatrixtouch
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
-import android.widget.Toast
-import com.cmaye.biomatrixtouch.databinding.ActivityMainBinding
+import com.cmaye.biomatrixtouch.databinding.ActivityLoginBinding
 
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMainBinding
+class LoginActivity : AppCompatActivity()
+{
+    private lateinit var binding : ActivityLoginBinding
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val biometricManager = BiometricManager.from(this)
@@ -49,14 +48,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-//        promptInfo = BiometricPrompt.PromptInfo.Builder()
-//            .setTitle("Biometric Authentication")
-//            .setSubtitle("Log in using your biometric credential")
-//            .setNegativeButtonText("Cancel")
-//            .build()
-
-        // Lets the user authenticate without performing an action, such as pressing a
-// button, after their biometric credential is accepted.
         promptInfo = BiometricPrompt.PromptInfo.Builder()
             .setTitle("Biometric login for my app")
             .setSubtitle("Log in using your biometric credential")
@@ -64,12 +55,16 @@ class MainActivity : AppCompatActivity() {
             .setConfirmationRequired(false)
             .build()
 
-        binding.authenticateButton.setOnClickListener {
+        binding.imgFingerPrint.setOnClickListener {
             biometricPrompt.authenticate(promptInfo)
         }
     }
 
+
+
     private fun displayMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
+
+
 }
