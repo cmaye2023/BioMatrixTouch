@@ -1,5 +1,6 @@
 package com.cmaye.biomatrixtouch
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -8,11 +9,11 @@ import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import com.cmaye.biomatrixtouch.databinding.ActivityLoginBinding
 
-class LoginActivity : AppCompatActivity()
-{
-    private lateinit var binding : ActivityLoginBinding
+class LoginActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityLoginBinding
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -26,8 +27,14 @@ class LoginActivity : AppCompatActivity()
                 displayMessage("This device doesn't support biometric authentication")
             BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE ->
                 displayMessage("Biometric authentication is currently unavailable")
-            BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED ->
+            BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
                 displayMessage("No biometric credentials are enrolled")
+                // Prompt the user to enroll a biometric credential
+                val enrollIntent = Intent()
+                enrollIntent.action = android.provider.Settings.ACTION_BIOMETRIC_ENROLL
+                enrollIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(enrollIntent)
+            }
         }
 
         val executor = ContextCompat.getMainExecutor(this)
@@ -60,11 +67,7 @@ class LoginActivity : AppCompatActivity()
         }
     }
 
-
-
     private fun displayMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
-
-
 }
