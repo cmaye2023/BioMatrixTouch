@@ -2,5 +2,7 @@
     <string name="app_name">BioMatrixTouch</string>
 
     <string name="underline_signup"><u>Sign Up</u></string>
+    <string name="underline_login"><u>Login</u></string>
+
 
 </resources>
