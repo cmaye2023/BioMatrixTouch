@@ -64,9 +64,7 @@ class MainActivity : AppCompatActivity() {
             .setConfirmationRequired(false)
             .build()
 
-        binding.authenticateButton.setOnClickListener {
-            biometricPrompt.authenticate(promptInfo)
-        }
+
     }
 
     private fun displayMessage(message: String) {

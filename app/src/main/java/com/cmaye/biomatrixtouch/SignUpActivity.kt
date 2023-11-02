@@ -20,6 +20,7 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        onClickListener()
         val biometricManager = BiometricManager.from(this)
         when (biometricManager.canAuthenticate()) {
             BiometricManager.BIOMETRIC_SUCCESS ->
@@ -65,6 +66,15 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.imgFingerPrint.setOnClickListener {
             biometricPrompt.authenticate(promptInfo)
+        }
+    }
+
+    private fun onClickListener()
+    {
+        binding.txtLogin.setOnClickListener {
+            val intent = Intent(this,LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
         }
     }
 

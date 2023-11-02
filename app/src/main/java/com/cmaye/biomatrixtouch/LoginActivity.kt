@@ -7,9 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import com.cmaye.biomatrixtouch.base_interface.signup_interface
 import com.cmaye.biomatrixtouch.databinding.ActivityLoginBinding
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(){
     private lateinit var binding: ActivityLoginBinding
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
@@ -47,6 +48,9 @@ class LoginActivity : AppCompatActivity() {
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                 super.onAuthenticationSucceeded(result)
                 displayMessage("Authentication succeeded!")
+                val intent = Intent(this@LoginActivity,MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
             }
 
             override fun onAuthenticationFailed() {
@@ -64,6 +68,11 @@ class LoginActivity : AppCompatActivity() {
 
         binding.imgFingerPrint.setOnClickListener {
             biometricPrompt.authenticate(promptInfo)
+        }
+
+        binding.txtSignUp.setOnClickListener {
+            val intent = Intent(this,SignUpActivity::class.java)
+            startActivity(intent)
         }
     }
 
